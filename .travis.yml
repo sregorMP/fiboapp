@@ -25,7 +25,7 @@ deploy:
   provider: elasticbeanstalk
   region: us-east-1
   app: fibo-app
-  env: Fibo-app-env
+  env: Fiboapp-env
   bucket_name: elasticbeanstalk-us-east-1-153986819543
   bucket_path: fibo-app
   on:
