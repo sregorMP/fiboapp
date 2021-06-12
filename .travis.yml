@@ -1,0 +1,23 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t sregor/fiboapp-test -f ./client/Dockerfile.dev ./client
+
+script: 
+  - docker run  sregor/fiboapp-test npm test -- --coverage
+
+after_success: 
+  - docker build -t sregor/fiboapp-client ./client 
+  - docker build -t sregor/fiboapp-nginx ./nginx
+  - docker build -t sregor/fiboapp-server ./server
+  - docker build -t sregor/fiboapp-worker ./worker 
+
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --passord-stdin 
+  
+  - docker push sregor/fiboapp-client
+  - docker push sregor/fiboapp-nginx
+  - docker push sregor/fiboapp-server
+  - docker push sregor/fiboapp-worker 
+  
