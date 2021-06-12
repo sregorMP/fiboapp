@@ -14,7 +14,7 @@ after_success:
   - docker build -t sregor/fiboapp-server ./server
   - docker build -t sregor/fiboapp-worker ./worker 
 
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --passord-stdin 
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin 
   
   - docker push sregor/fiboapp-client
   - docker push sregor/fiboapp-nginx
